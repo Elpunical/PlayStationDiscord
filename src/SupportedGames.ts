@@ -11,6 +11,7 @@ interface IGame
 
 interface ISupportedGames
 {
+	ps5 : IGame[];
 	ps4 : IGame[];
 	ps3 : IGame[];
 	vita : IGame[];
@@ -68,7 +69,7 @@ class SupportedGames
 
 	public get(presence: IPresence) : IGame
 	{
-		return this.store.get('consoles.ps4').find((game: IGame) => {
+		return this.store.get('consoles.PS5').find((game: IGame) => {
 			return (game.titleId.toLowerCase() === presence.npTitleId.toLowerCase()) || (game.name.toLowerCase() === presence.titleName.toLowerCase());
 		});
 	}

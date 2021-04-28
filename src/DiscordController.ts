@@ -26,10 +26,10 @@ export class DiscordController
 	// Most of these properties get replaced in the constructor for the respective console.
 	private _defaultInfo : IDiscordPresenceDefaultDataModel =  {
 		instance: true,
-		largeImageKey: 'ps4_main',
-		largeImageText: 'PlayStation 4',
-		smallImageKey: 'ps4_main',
-		smallImageText: 'PlayStationDiscord ' + (packageJson.version || '')
+		largeImageKey: 'ps5_main',
+		largeImageText: 'PlayStation™5',
+		smallImageKey: 'ps5_main',
+		smallImageText: 'PlayStation™5'
 	};
 
 	constructor(console: PlayStationConsole)
