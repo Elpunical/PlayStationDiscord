@@ -6,6 +6,7 @@ import {PlayStationConsole, PlayStationConsoleType } from './Consoles/PlayStatio
 import { IDiscordPresenceModel, IDiscordPresenceUpdateOptions } from './Model/DiscordPresenceModel';
 import { autoUpdater } from 'electron-updater';
 import axios from 'axios';
+import PlayStation5 from './Consoles/PlayStation5';
 import PlayStation4 from './Consoles/PlayStation4';
 import PlayStation3 from './Consoles/PlayStation3';
 import PlayStationVita from './Consoles/PlayStationVita';
@@ -429,7 +430,12 @@ function updateRichPresence() : void
 
 function getConsoleFromType(type: PlayStationConsoleType) : PlayStationConsole
 {
-	if (type === PlayStationConsoleType.PS4)
+	if (type === PlayStationConsoleType.PS5)
+	{
+		return new PlayStation5();
+	}
+
+	if (type === PlayStationConsoleType.ps4)
 	{
 		return new PlayStation4();
 	}
