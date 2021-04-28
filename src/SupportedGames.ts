@@ -1,8 +1,7 @@
 import _store = require('electron-store');
 import log = require('electron-log');
 import axios from 'axios';
-import AbstractPresence from './PlayStation/AbstractPresence';
-const unorm = require('unorm');
+import { IPresence } from './Model/ProfileModel';
 
 interface IGame
 {
@@ -12,7 +11,6 @@ interface IGame
 
 interface ISupportedGames
 {
-	ps5 : IGame[];
 	ps4 : IGame[];
 	ps3 : IGame[];
 	vita : IGame[];
@@ -47,7 +45,7 @@ class SupportedGames
 			headers['If-None-Match'] = checksum;
 		}
 
-		axios.get(`https://raw.githubusercontent.com/Tustin/PlayStationDiscord-Games/master/games.json?_=${Date.now()}`, {
+		axios.get(`https://raw.githubusercontent.com/Elpunical/PlayStationDiscord-Games/master/games.json?_=${Date.now()}`, {
 			headers
 		})
 		.then((response) => {
@@ -68,23 +66,10 @@ class SupportedGames
 		});
 	}
 
-	public get(presence: AbstractPresence) : IGame
+	public get(presence: IPresence) : IGame
 	{
-		const console = presence.platform().toLowerCase();
-		const consoleStore = `consoles.${console}`;
-		if (!this.store.has(consoleStore))
-		{
-			log.debug('no console found in supported games list.');
-
-			return undefined;
-		}
-
-		return this.store.get(consoleStore).find((game: IGame) => {
-			if (game.titleId.toLowerCase() === presence.titleId().toLowerCase()) {
-				return true;
-			}
-
-			return unorm.nfc(game.name.toLowerCase()).indexOf(unorm.nfc(presence.titleName().toLowerCase())) !== -1;
+		return this.store.get('consoles.ps4').find((game: IGame) => {
+			return (game.titleId.toLowerCase() === presence.npTitleId.toLowerCase()) || (game.name.toLowerCase() === presence.titleName.toLowerCase());
 		});
 	}
 }

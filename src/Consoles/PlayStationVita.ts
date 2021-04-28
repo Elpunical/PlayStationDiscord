@@ -14,6 +14,6 @@ export default class PlayStationVita extends PlayStationConsole
 
 	public get consoleName() : string
 	{
-		return 'PlayStation Vita';
+		return 'PlayStation™Vita';
 	}
 }
