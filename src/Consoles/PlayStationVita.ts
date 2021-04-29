@@ -4,7 +4,7 @@ export default class PlayStationVita extends PlayStationConsole
 {
 	public constructor()
 	{
-		super(PlayStationConsoleType.PSVITA, '493957159323828259');
+		super(PlayStationConsoleType.PSVITA, '837007974651396145');
 	}
 
 	public get assetName() : string
